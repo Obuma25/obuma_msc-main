@@ -1,0 +1,132 @@
+{
+  "test_suite": "DNS Exfiltration Detection Analysis",
+  "hypothesis": "H2: GuardDuty detection rate \u226590% for DNS exfiltration, median TTD <10 min",
+  "aws_region": "eu-west-2",
+  "execution_date": "2026-01-10T16:46:09.529162+00:00",
+  "total_tests": 5,
+  "detection_summary": {
+    "total_tests": 5,
+    "successful_attacks": 5,
+    "detected": 0,
+    "detection_rate_percent": 0.0,
+    "hypothesis_validated": false
+  },
+  "ttd_statistics": null,
+  "test_results": [
+    {
+      "test_id": "EX-01",
+      "description": "DNS Tunneling - Small volume, moderate rate",
+      "data_size_kb": 50,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 180,
+        "attack_time": "2026-01-10T15:52:54.618104+00:00",
+        "command_id": "946b447a-af0a-456e-8184-68369baad4fd",
+        "session_id": "78ffe50fc6c468bf"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T15:52:54.618069+00:00"
+    },
+    {
+      "test_id": "EX-02",
+      "description": "DNS Tunneling - Medium volume, moderate rate",
+      "data_size_kb": 100,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 2601,
+        "successful_queries": 2601,
+        "data_size_kb": 100,
+        "total_time_seconds": 360,
+        "attack_time": "2026-01-10T16:03:44.085725+00:00",
+        "command_id": "7c6efd04-2ea8-4dc9-9f50-55c45df7e8c2",
+        "session_id": "4cff87d4a97d7c1e"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T16:03:44.085678+00:00"
+    },
+    {
+      "test_id": "EX-03",
+      "description": "DNS Tunneling - Small volume, high rate",
+      "data_size_kb": 50,
+      "queries_per_second": 20,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 120,
+        "attack_time": "2026-01-10T16:14:17.640775+00:00",
+        "command_id": "8e0943fc-4353-466b-8a1e-2dc9683349cf",
+        "session_id": "84956342456830ff"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T16:14:17.640692+00:00"
+    },
+    {
+      "test_id": "EX-04",
+      "description": "DNS Tunneling - Medium volume, slow rate",
+      "data_size_kb": 75,
+      "queries_per_second": 5,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1951,
+        "successful_queries": 1951,
+        "data_size_kb": 75,
+        "total_time_seconds": 460,
+        "attack_time": "2026-01-10T16:24:54.299405+00:00",
+        "command_id": "c253a3ff-5463-4b9a-852b-18abb7b2fa6d",
+        "session_id": "bb5b2d4555fcb375"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T16:24:54.299354+00:00"
+    },
+    {
+      "test_id": "EX-05",
+      "description": "DNS Tunneling - Low-and-slow (threshold test)",
+      "data_size_kb": 25,
+      "queries_per_second": 2,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 651,
+        "successful_queries": 651,
+        "data_size_kb": 25,
+        "total_time_seconds": 350,
+        "attack_time": "2026-01-10T16:36:07.783808+00:00",
+        "command_id": "4e951283-5731-4317-9855-c4e2f253d481",
+        "session_id": "67a91ff6de3afe2d"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T16:36:07.783760+00:00"
+    }
+  ]
+}

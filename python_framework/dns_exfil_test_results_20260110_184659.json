@@ -1,0 +1,147 @@
+{
+  "test_suite": "DNS Exfiltration Detection Analysis",
+  "hypothesis": "H2: GuardDuty detection rate \u226590% for DNS exfiltration, median TTD <10 min",
+  "aws_region": "eu-west-2",
+  "execution_date": "2026-01-10T17:46:59.665186+00:00",
+  "total_tests": 5,
+  "detection_summary": {
+    "total_tests": 5,
+    "successful_attacks": 5,
+    "detected": 1,
+    "detection_rate_percent": 20.0,
+    "hypothesis_validated": false
+  },
+  "ttd_statistics": {
+    "mean_seconds": 7.082896,
+    "median_seconds": 7.082896,
+    "min_seconds": 7.082896,
+    "max_seconds": 7.082896,
+    "stddev_seconds": 0
+  },
+  "test_results": [
+    {
+      "test_id": "EX-01",
+      "description": "DNS Tunneling - Small volume, moderate rate",
+      "data_size_kb": 50,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 180,
+        "attack_time": "2026-01-10T16:53:07.698509+00:00",
+        "command_id": "e22f564b-090d-476f-a5d7-61681007c57d",
+        "session_id": "4b6876a71dac7eb6"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T16:53:07.698473+00:00"
+    },
+    {
+      "test_id": "EX-02",
+      "description": "DNS Tunneling - Medium volume, moderate rate",
+      "data_size_kb": 100,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 2601,
+        "successful_queries": 2601,
+        "data_size_kb": 100,
+        "total_time_seconds": 350,
+        "attack_time": "2026-01-10T17:03:45.231349+00:00",
+        "command_id": "fbe8c479-6385-443f-a4a2-ffe98682b76f",
+        "session_id": "5e2bb721b56c4441"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T17:03:45.231257+00:00"
+    },
+    {
+      "test_id": "EX-03",
+      "description": "DNS Tunneling - Small volume, high rate",
+      "data_size_kb": 50,
+      "queries_per_second": 20,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 120,
+        "attack_time": "2026-01-10T17:14:16.620536+00:00",
+        "command_id": "0fdf7ed9-468b-47a1-8901-c48d94292ecb",
+        "session_id": "16eb9f316e1f4f22"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T17:14:16.620486+00:00"
+    },
+    {
+      "test_id": "EX-04",
+      "description": "DNS Tunneling - Medium volume, slow rate",
+      "data_size_kb": 75,
+      "queries_per_second": 5,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1951,
+        "successful_queries": 1951,
+        "data_size_kb": 75,
+        "total_time_seconds": 460,
+        "attack_time": "2026-01-10T17:24:53.718577+00:00",
+        "command_id": "3688c8d9-f7ae-4368-9b46-ae080fe815db",
+        "session_id": "31b7a9d65df26c7e"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-01-10T17:24:53.718530+00:00"
+    },
+    {
+      "test_id": "EX-05",
+      "description": "DNS Tunneling - Low-and-slow (threshold test)",
+      "data_size_kb": 25,
+      "queries_per_second": 2,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 651,
+        "successful_queries": 651,
+        "data_size_kb": 25,
+        "total_time_seconds": 340,
+        "attack_time": "2026-01-10T17:36:04.917150+00:00",
+        "command_id": "1ae3b890-ddb7-41db-b514-862b4b675355",
+        "session_id": "5af6c9111a3dc57f"
+      },
+      "monitoring_duration_minutes": 10,
+      "total_findings": 2,
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "18cdd48011c175987815f7edc995f81c",
+          "type": "Trojan:EC2/DNSDataExfiltration",
+          "severity": 8.0,
+          "time_to_detect_seconds": 7.082896,
+          "description": "The EC2 instance i-02e572dc2e7d1e61d is attempting to query domain names that resemble exfiltrated data. This could be an indication of a compromised instance.",
+          "title": "Data exfiltration through DNS queries from the EC2 instance i-02e572dc2e7d1e61d."
+        }
+      ],
+      "start_time": "2026-01-10T17:36:04.917104+00:00"
+    }
+  ]
+}

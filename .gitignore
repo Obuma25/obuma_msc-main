@@ -1,0 +1,133 @@
+
+# IDE and Editor directories
+.vscode/
+.vscode/**
+.cursor/
+.cursor/**
+.idea/
+*.swp
+*.swo
+*~
+
+# Codacy
+.codacy/
+.codacy/**
+codacy.json
+.codacy.yml
+.codacy.yaml
+*.codacy
+cli.sh
+cli-config.yaml
+codacy.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+*.log.*
+python_framework/*.log
+python_framework/*_test_*.log
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.tfvars.json
+.terraform.tfstate.lock.info
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# AWS and Credentials
+.aws/
+*.pem
+*.key
+credentials
+*.credentials
+.aws/credentials
+.aws/config
+*.env
+.env
+.env.local
+
+# SSH Keys
+*.pem
+id_rsa*
+*.ppk
+known_hosts
+
+# Test Results and Sensitive Data
+test_results/
+results/
+*.json.bak
+# Allow test results JSON files (uncomment to exclude):
+# *_results_*.json
+# *_findings_*.json
+baseline_*.json
+
+# Explicitly allow files showcased in appendices
+!python_framework/sqli_test_results_20260110_150329.json
+!python_framework/dns_exfil_test_results_20260110_184659.json
+!python_framework/guardduty_monitor.py
+!python_framework/metrics_calculator.py
+!python_framework/sqli_test_suite.py
+!python_framework/dns_exfil_test_suite.py
+!python_framework/baseline_runner.py
+!python_framework/main.py
+!python_framework/requirements.txt
+!terraform_code/main.tf
+!terraform_code/variables.tf
+!terraform_code/outputs.tf
+!terraform_code/user_data.sh
+!terraform_code/route53_resolver_logging.tf
+!terraform_code/iam_ssm.tf
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Large Files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+
+# Cursor AI rules (already covered above)
+
+# README
+*.md
+!README.md
+!SETUP_AND_TESTING_GUIDE.md

@@ -1,0 +1,16 @@
+# Minimal Requirements - Core dependencies only
+# Use this if pandas installation fails
+
+# AWS SDK (REQUIRED)
+boto3>=1.34.0
+botocore>=1.34.0
+
+# HTTP requests (REQUIRED)
+requests>=2.31.0
+
+# Logging (REQUIRED)
+colorlog>=6.8.0
+
+# Configuration (REQUIRED)
+pyyaml>=6.0.0
+

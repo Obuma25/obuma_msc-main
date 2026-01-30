@@ -1,0 +1,27 @@
+# GuardDuty Testing Framework Dependencies
+# Install with: pip install -r requirements.txt
+
+# AWS SDK (REQUIRED)
+boto3>=1.34.0
+botocore>=1.34.0
+
+# HTTP requests (REQUIRED)
+requests>=2.31.0
+
+# Logging (REQUIRED)
+colorlog>=6.8.0
+
+# Configuration (REQUIRED)
+pyyaml>=6.0.0
+
+# Data analysis (OPTIONAL - only needed for advanced analysis)
+# If installation fails, use: pip install -r requirements-minimal.txt
+# pandas>=2.1.0
+# numpy>=1.26.0
+
+# Visualization (OPTIONAL - only needed for creating charts)
+# matplotlib>=3.8.0
+# seaborn>=0.13.0
+
+# Testing (OPTIONAL)
+# pytest>=7.4.0
