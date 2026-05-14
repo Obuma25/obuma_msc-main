@@ -1,0 +1,261 @@
+{
+  "test_suite": "DNS Exfiltration Detection Analysis",
+  "hypothesis": "H2: Observing GuardDuty detection behavior for DNS exfiltration under controlled test conditions",
+  "aws_region": "eu-west-2",
+  "execution_date": "2026-03-25T15:11:40.156338+00:00",
+  "total_tests": 10,
+  "detection_summary": {
+    "total_tests": 10,
+    "successful_attacks": 9,
+    "detected": 1,
+    "detection_rate_percent": 10.0,
+    "observations": {
+      "detection_rate_observed": 10.0,
+      "ttd_median_observed": 2.395083
+    }
+  },
+  "ttd_statistics": {
+    "mean_seconds": 2.395083,
+    "median_seconds": 2.395083,
+    "min_seconds": 2.395083,
+    "max_seconds": 2.395083,
+    "stddev_seconds": 0
+  },
+  "test_results": [
+    {
+      "test_id": "EX-01",
+      "description": "DNS Tunnelling - Small volume, moderate rate",
+      "data_size_kb": 50,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 180,
+        "attack_time": "2026-03-25T12:32:27.604917+00:00",
+        "command_id": "767c2a90-4a5a-4d54-ae88-fef8cb57f1d1",
+        "unique_domains": 1301
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 2.395083,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-03-25T12:32:27.604917+00:00"
+    },
+    {
+      "test_id": "EX-02",
+      "description": "DNS Tunnelling - Medium volume, moderate rate",
+      "data_size_kb": 100,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 2601,
+        "successful_queries": 2601,
+        "data_size_kb": 100,
+        "total_time_seconds": 340,
+        "attack_time": "2026-03-25T12:48:11.521663+00:00",
+        "command_id": "41dca78b-3198-480f-a6c6-8f580a201f63",
+        "unique_domains": 2601
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T12:48:11.521663+00:00"
+    },
+    {
+      "test_id": "EX-03",
+      "description": "DNS Tunnelling - Small volume, high rate",
+      "data_size_kb": 50,
+      "queries_per_second": 20,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 110,
+        "attack_time": "2026-03-25T13:04:36.475638+00:00",
+        "command_id": "89125ff7-f415-416a-8ff2-784dedb51303",
+        "unique_domains": 1301
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T13:04:36.475638+00:00"
+    },
+    {
+      "test_id": "EX-04",
+      "description": "DNS Tunnelling - Medium volume, slow rate",
+      "data_size_kb": 75,
+      "queries_per_second": 5,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1951,
+        "successful_queries": 1951,
+        "data_size_kb": 75,
+        "total_time_seconds": 440,
+        "attack_time": "2026-03-25T13:20:10.044195+00:00",
+        "command_id": "6903e1ab-e7a7-496b-a518-33e202e2c468",
+        "unique_domains": 1951
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T13:20:10.044195+00:00"
+    },
+    {
+      "test_id": "EX-05",
+      "description": "DNS Tunnelling - Low-and-slow (threshold test)",
+      "data_size_kb": 25,
+      "queries_per_second": 2,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 900,
+        "successful_queries": 900,
+        "data_size_kb": 25,
+        "total_time_seconds": 470,
+        "attack_time": "2026-03-25T13:36:24.891875+00:00",
+        "command_id": "8b245949-982b-43cc-b648-d87d76d3371e",
+        "unique_domains": 900
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T13:36:24.891875+00:00"
+    },
+    {
+      "test_id": "EX-06",
+      "description": "DNS Tunnelling - High volume, high rate burst",
+      "data_size_kb": 200,
+      "queries_per_second": 25,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 5202,
+        "successful_queries": 5202,
+        "data_size_kb": 200,
+        "total_time_seconds": 370,
+        "attack_time": "2026-03-25T13:52:02.499343+00:00",
+        "command_id": "97c9f907-6220-4f12-943b-a1a2dabc0434",
+        "unique_domains": 5202
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T13:52:02.499343+00:00"
+    },
+    {
+      "test_id": "EX-07",
+      "description": "DNS Tunnelling - Large volume, moderate rate sustained",
+      "data_size_kb": 150,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 3901,
+        "successful_queries": 3901,
+        "data_size_kb": 150,
+        "total_time_seconds": 500,
+        "attack_time": "2026-03-25T14:08:01.667657+00:00",
+        "command_id": "99edd60e-b93f-42c9-904d-1892e677221e",
+        "unique_domains": 3901
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T14:08:01.667657+00:00"
+    },
+    {
+      "test_id": "EX-08",
+      "description": "DNS Tunnelling - Minimal volume, very slow drip",
+      "data_size_kb": 10,
+      "queries_per_second": 1,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 900,
+        "successful_queries": 900,
+        "data_size_kb": 10,
+        "total_time_seconds": 120,
+        "attack_time": "2026-03-25T14:24:20.637654+00:00",
+        "command_id": "35719d45-6449-486d-89f1-b0c5321ff1e5",
+        "unique_domains": 900
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T14:24:20.637654+00:00"
+    },
+    {
+      "test_id": "EX-09",
+      "description": "DNS Tunnelling - Medium volume, high rate short burst",
+      "data_size_kb": 75,
+      "queries_per_second": 15,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1951,
+        "successful_queries": 1951,
+        "data_size_kb": 75,
+        "total_time_seconds": 180,
+        "attack_time": "2026-03-25T14:40:13.689622+00:00",
+        "command_id": "37d6b231-379a-4cb4-874d-b9fbe34abc22",
+        "unique_domains": 1951
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T14:40:13.689622+00:00"
+    },
+    {
+      "test_id": "EX-10",
+      "description": "DNS Tunnelling - Large volume, slow rate extended",
+      "data_size_kb": 125,
+      "queries_per_second": 3,
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "Timeout waiting for SSM command completion",
+        "queries_sent": 0,
+        "attack_time": "2026-03-25T14:56:06.976339+00:00"
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 0,
+      "correlated_findings": 0,
+      "detected": false,
+      "findings": [],
+      "start_time": "2026-03-25T14:56:06.976339+00:00"
+    }
+  ]
+}
