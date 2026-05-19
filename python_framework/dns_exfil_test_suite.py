@@ -2,14 +2,13 @@
 
 import boto3
 import time
-import base64
 import os
-import hashlib
-import re
 import statistics
 import json
 from datetime import datetime, timezone
 from typing import Dict, List, Any
+from botocore.config import Config
+from botocore.exceptions import BotoCoreError, ClientError, EndpointConnectionError
 from guardduty_monitor import GuardDutyMonitor
 
 
@@ -18,8 +17,34 @@ class DNSExfiltrationTestSuite:
         self.ec2_instance_id = ec2_instance_id
         self.aws_region = aws_region
         self.monitor = GuardDutyMonitor(aws_region)
-        self.ssm_client = boto3.client('ssm', region_name=aws_region)
+        self.ssm_client = boto3.client(
+            'ssm',
+            region_name=aws_region,
+            config=Config(
+                connect_timeout=10,
+                read_timeout=60,
+                retries={'max_attempts': 10, 'mode': 'standard'},
+            ),
+        )
         self.results = []
+
+    def _call_ssm(self, method_name: str, **kwargs):
+        last_error = None
+        for attempt in range(1, 6):
+            try:
+                return getattr(self.ssm_client, method_name)(**kwargs)
+            except EndpointConnectionError as exc:
+                last_error = exc
+            except (BotoCoreError, ClientError) as exc:
+                if "Could not connect to the endpoint URL" not in str(exc):
+                    raise
+                last_error = exc
+
+            time.sleep(min(5 * attempt, 20))
+
+        if last_error is not None:
+            raise last_error
+        raise RuntimeError(f"SSM call failed without a captured error: {method_name}")
         
     def execute_dns_exfiltration(self, test_id: str, domain: str, 
                                  data_size_kb: int, queries_per_second: int) -> Dict[str, Any]:
@@ -70,7 +95,8 @@ done
         
         try:
             try:
-                instance_info = self.ssm_client.describe_instance_information(
+                instance_info = self._call_ssm(
+                    'describe_instance_information',
                     Filters=[{'Key': 'InstanceIds', 'Values': [self.ec2_instance_id]}]
                 )
                 if instance_info['InstanceInformationList']:
@@ -81,7 +107,8 @@ done
                 pass
             
             
-            response = self.ssm_client.send_command(
+            response = self._call_ssm(
+                'send_command',
                 InstanceIds=[self.ec2_instance_id],
                 DocumentName='AWS-RunShellScript',
                 Parameters={'commands': [bash_script]},
@@ -100,7 +127,8 @@ done
                 elapsed += wait_interval
                 
                 try:
-                    invocation = self.ssm_client.get_command_invocation(
+                    invocation = self._call_ssm(
+                        'get_command_invocation',
                         CommandId=command_id,
                         InstanceId=self.ec2_instance_id
                     )
@@ -177,13 +205,27 @@ done
             data_size_kb=test_config['data_size_kb'],
             queries_per_second=test_config['queries_per_second']
         )
-        
-        findings = self.monitor.monitor_findings(attack_start_time=start_time,
-                                                  duration_minutes=monitoring_duration_minutes,
-                                                  poll_interval_seconds=60)
+        attack_end_time = datetime.now(timezone.utc)
+
+        monitoring_start_time = attack_end_time if attack_end_time > start_time else start_time
+        findings = self.monitor.monitor_findings(
+            attack_start_time=monitoring_start_time,
+            duration_minutes=monitoring_duration_minutes,
+            poll_interval_seconds=60,
+        )
         correlated_findings = []
+        ignored_findings = []
         for finding in findings:
-            is_correlated, ttd = self.monitor.correlate_finding_with_attack(finding, start_time)
+            if not self.monitor.is_relevant_finding(finding):
+                ignored_findings.append(finding['Type'])
+                continue
+
+            is_correlated, ttd = self.monitor.correlate_finding_with_attack(
+                finding,
+                start_time,
+                attack_end_time=attack_end_time,
+                tolerance_minutes=monitoring_duration_minutes,
+            )
             if is_correlated:
                 correlated_findings.append({
                     'finding_id': finding['Id'],
@@ -203,6 +245,8 @@ done
             'attack_details': attack_result,
             'monitoring_duration_minutes': monitoring_duration_minutes,
             'total_findings': len(findings),
+            'ignored_findings': len(ignored_findings),
+            'ignored_finding_types': ignored_findings,
             'correlated_findings': len(correlated_findings),
             'detected': len(correlated_findings) > 0,
             'findings': correlated_findings,
@@ -354,6 +398,7 @@ done
 
 
 def main():
+    import os
     import sys
     import logging
 
@@ -363,8 +408,8 @@ def main():
         handlers=[logging.StreamHandler(sys.stdout)]
     )
 
-    AWS_REGION = "eu-west-2"
-    EC2_INSTANCE_ID = "i-0c133dabd8f80c99e"
+    AWS_REGION = os.getenv("AWS_REGION", "eu-west-2")
+    EC2_INSTANCE_ID = os.getenv("EC2_INSTANCE_ID", "<EC2_INSTANCE_ID>")
     MONITORING_DURATION = 15
 
     print(f"\n{'='*60}")
@@ -391,4 +436,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

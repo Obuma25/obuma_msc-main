@@ -1,5 +1,6 @@
 import boto3
 import time
+import os
 from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Tuple, Optional
 import logging
@@ -13,9 +14,21 @@ class GuardDutyMonitor:
         self.client = boto3.client('guardduty', region_name=region)
         self.detector_id = self._get_detector_id()
         self.logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
+        ignored_types = os.getenv(
+            'GUARDDUTY_IGNORED_FINDING_TYPES',
+            'Policy:IAMUser/RootCredentialUsage'
+        )
+        self.ignored_finding_types = {
+            finding_type.strip() for finding_type in ignored_types.split(',') if finding_type.strip()
+        }
         
         self.logger.info(f"GuardDuty Monitor initialized for region: {region}")
         self.logger.info(f"Detector ID: {self.detector_id}")
+        if self.ignored_finding_types:
+            self.logger.info(
+                "Ignoring finding types during correlation: %s",
+                ", ".join(sorted(self.ignored_finding_types))
+            )
     
     def _get_detector_id(self) -> str:
         try:
@@ -89,29 +102,67 @@ class GuardDutyMonitor:
         self.logger.info(f"Monitoring complete. Total findings: {len(findings_detected)}")
         return findings_detected
     
-    def correlate_finding_with_attack(self, finding: Dict, 
-                                     attack_start_time: datetime,
-                                     tolerance_minutes: int = 5) -> Tuple[bool, Optional[float]]:
+    def correlate_finding_with_attack(
+        self,
+        finding: Dict,
+        attack_start_time: datetime,
+        attack_end_time: Optional[datetime] = None,
+        tolerance_minutes: int = 5,
+    ) -> Tuple[bool, Optional[float]]:
         try:
-            finding_time_str = finding['Service']['EventFirstSeen']
-            finding_time = datetime.fromisoformat(finding_time_str.replace('Z', '+00:00'))
-            time_diff = (finding_time - attack_start_time).total_seconds()
+            window_end = attack_end_time or attack_start_time
             tolerance_seconds = tolerance_minutes * 60
-            is_correlated = (time_diff >= 0) and (time_diff <= tolerance_seconds)
+            earliest_allowed = attack_start_time
+            latest_allowed = window_end + timedelta(seconds=tolerance_seconds)
+            candidate_times = self._extract_correlation_times(finding)
+            matching_times = [
+                finding_time
+                for finding_time in candidate_times
+                if earliest_allowed <= finding_time <= latest_allowed
+            ]
+            is_correlated = bool(matching_times)
             
             if is_correlated:
+                finding_time = min(matching_times)
+                time_diff = (finding_time - attack_start_time).total_seconds()
                 self.logger.info(
                     f"Finding correlated with attack. "
                     f"TTD: {time_diff:.2f} seconds ({time_diff/60:.2f} minutes)"
                 )
                 return True, time_diff
             else:
-                self.logger.debug(f"Finding outside correlation window: {time_diff:.2f}s")
+                if candidate_times:
+                    nearest_time = min(
+                        candidate_times,
+                        key=lambda finding_time: abs((finding_time - attack_start_time).total_seconds()),
+                    )
+                    time_diff = (nearest_time - attack_start_time).total_seconds()
+                    self.logger.debug(f"Finding outside correlation window: {time_diff:.2f}s")
                 return False, None
                 
         except Exception as e:
             self.logger.error(f"Error correlating finding: {e}")
             return False, None
+
+    def is_relevant_finding(self, finding: Dict) -> bool:
+        return finding.get('Type') not in self.ignored_finding_types
+
+    def _extract_correlation_times(self, finding: Dict) -> List[datetime]:
+        timestamps = []
+        for timestamp in (
+            finding.get('UpdatedAt'),
+            finding.get('Service', {}).get('EventLastSeen'),
+            finding.get('Service', {}).get('EventFirstSeen'),
+        ):
+            if timestamp:
+                parsed = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                if parsed not in timestamps:
+                    timestamps.append(parsed)
+
+        if not timestamps:
+            raise KeyError("Finding did not include UpdatedAt, EventLastSeen, or EventFirstSeen")
+
+        return timestamps
     
     def get_finding_summary(self, finding: Dict) -> Dict:
         return {

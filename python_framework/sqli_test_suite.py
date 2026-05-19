@@ -54,13 +54,24 @@ class SQLiTestSuite:
             method=test_config.get('method', 'POST'),
             param_name=test_config.get('param_name', 'email')
         )
+        attack_end_time = datetime.now(timezone.utc)
         
         findings = self.monitor.monitor_findings(attack_start_time=start_time,
                                                  duration_minutes=monitoring_duration_minutes,
                                                  poll_interval_seconds=30)
         correlated_findings = []
+        ignored_findings = []
         for finding in findings:
-            is_correlated, ttd = self.monitor.correlate_finding_with_attack(finding, start_time)
+            if not self.monitor.is_relevant_finding(finding):
+                ignored_findings.append(finding['Type'])
+                continue
+
+            is_correlated, ttd = self.monitor.correlate_finding_with_attack(
+                finding,
+                start_time,
+                attack_end_time=attack_end_time,
+                tolerance_minutes=monitoring_duration_minutes,
+            )
             if is_correlated:
                 correlated_findings.append({
                     'finding_id': finding['Id'],
@@ -80,6 +91,8 @@ class SQLiTestSuite:
             'attack_details': attack_result,
             'monitoring_duration_minutes': monitoring_duration_minutes,
             'total_findings': len(findings),
+            'ignored_findings': len(ignored_findings),
+            'ignored_finding_types': ignored_findings,
             'correlated_findings': len(correlated_findings),
             'detected': len(correlated_findings) > 0,
             'findings': correlated_findings,
@@ -231,6 +244,7 @@ class SQLiTestSuite:
 
 
 def main():
+    import os
     import sys
     import logging
 
@@ -240,8 +254,8 @@ def main():
         handlers=[logging.StreamHandler(sys.stdout)]
     )
 
-    TARGET_URL = "http://13.42.131.156"
-    AWS_REGION = "eu-west-2"
+    TARGET_URL = os.getenv("TARGET_URL", "http://<JUICE_SHOP_IP>")
+    AWS_REGION = os.getenv("AWS_REGION", "eu-west-2")
     MONITORING_DURATION = 5
 
     print(f"\n{'='*60}")
@@ -263,4 +277,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

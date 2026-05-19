@@ -3,8 +3,12 @@
 from main import GuardDutyTestRunner
 from datetime import datetime
 import json
+import os
 
-runner = GuardDutyTestRunner('http://13.43.131.11', 'eu-west-2')
+target_url = os.getenv('TARGET_URL', 'http://<JUICE_SHOP_IP>')
+aws_region = os.getenv('AWS_REGION', 'eu-west-2')
+
+runner = GuardDutyTestRunner(target_url, aws_region)
 
 result = runner.run_sqli_test(
     test_id='TEST-01',
@@ -20,4 +24,3 @@ runner.monitor.monitor_findings = lambda start, duration_minutes=2, poll_interva
 
 with open('test_result.json', 'w') as f:
     json.dump(result, f, indent=2, default=str)
-

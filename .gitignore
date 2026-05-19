@@ -52,7 +52,6 @@ terraform.tfstate
 terraform.tfstate.backup
 *.tfvars
 *.tfvars.json
-tfplan
 .terraform.tfstate.lock.info
 crash.log
 override.tf

@@ -2,7 +2,7 @@
   "test_suite": "DNS Exfiltration Detection Analysis",
   "hypothesis": "H2: Observing GuardDuty detection behavior for DNS exfiltration under controlled test conditions",
   "aws_region": "eu-west-2",
-  "execution_date": "2026-04-27T08:07:44.737867+00:00",
+  "execution_date": "2026-04-26T23:16:58.224573+00:00",
   "total_tests": 10,
   "detection_summary": {
     "total_tests": 10,
@@ -28,16 +28,21 @@
         "successful_queries": 1301,
         "data_size_kb": 50,
         "total_time_seconds": 170,
-        "attack_time": "2026-04-27T05:27:48.839898+00:00",
-        "command_id": "daf31bba-1746-48af-b509-79a3291dd3a5",
+        "attack_time": "2026-04-26T19:39:46.805000+00:00",
+        "command_id": "c322d667-4c24-4bc8-b858-81e0b964f21d",
         "unique_domains": 1301
       },
       "monitoring_duration_minutes": 15,
-      "total_findings": 2,
+      "total_findings": 3,
+      "ignored_findings": 2,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage",
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T05:27:48.839898+00:00"
+      "start_time": "2026-04-26T19:39:46.805000+00:00"
     },
     {
       "test_id": "EX-02",
@@ -51,16 +56,20 @@
         "successful_queries": 2601,
         "data_size_kb": 100,
         "total_time_seconds": 340,
-        "attack_time": "2026-04-27T05:44:17.791831+00:00",
-        "command_id": "eb0a50ff-7223-4586-ab84-c4ce099b7514",
+        "attack_time": "2026-04-26T19:58:16.408686+00:00",
+        "command_id": "d9f3e2ff-2fa9-4717-8af1-4e0bf1bdbffa",
         "unique_domains": 2601
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T05:44:17.791831+00:00"
+      "start_time": "2026-04-26T19:58:16.408686+00:00"
     },
     {
       "test_id": "EX-03",
@@ -74,16 +83,20 @@
         "successful_queries": 1301,
         "data_size_kb": 50,
         "total_time_seconds": 110,
-        "attack_time": "2026-04-27T06:00:40.672059+00:00",
-        "command_id": "02a514d8-5890-420e-83d4-70a6a830ec30",
+        "attack_time": "2026-04-26T20:19:41.482438+00:00",
+        "command_id": "8e547072-16f4-424f-9dc7-d5b1e60f1eb8",
         "unique_domains": 1301
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T06:00:40.672059+00:00"
+      "start_time": "2026-04-26T20:19:41.482438+00:00"
     },
     {
       "test_id": "EX-04",
@@ -97,16 +110,20 @@
         "successful_queries": 1951,
         "data_size_kb": 75,
         "total_time_seconds": 450,
-        "attack_time": "2026-04-27T06:17:09.494667+00:00",
-        "command_id": "244ff11f-a5c0-49e8-a966-064edd22c02b",
+        "attack_time": "2026-04-26T20:37:10.681932+00:00",
+        "command_id": "f1040670-432b-4808-bf1c-6064d9e8e36d",
         "unique_domains": 1951
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T06:17:09.494667+00:00"
+      "start_time": "2026-04-26T20:37:10.681932+00:00"
     },
     {
       "test_id": "EX-05",
@@ -120,16 +137,20 @@
         "successful_queries": 900,
         "data_size_kb": 25,
         "total_time_seconds": 470,
-        "attack_time": "2026-04-27T06:33:23.369245+00:00",
-        "command_id": "c47e74dc-98e7-4e17-b15c-abf4d21a6c85",
+        "attack_time": "2026-04-26T21:00:27.839171+00:00",
+        "command_id": "1f34336a-a487-4b98-a8c9-1a181a8eba56",
         "unique_domains": 900
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T06:33:23.369245+00:00"
+      "start_time": "2026-04-26T21:00:27.839171+00:00"
     },
     {
       "test_id": "EX-06",
@@ -143,16 +164,20 @@
         "successful_queries": 5202,
         "data_size_kb": 200,
         "total_time_seconds": 360,
-        "attack_time": "2026-04-27T06:48:59.042442+00:00",
-        "command_id": "463ad41a-3340-40b3-9627-b8ea2358f9d0",
+        "attack_time": "2026-04-26T21:24:05.070946+00:00",
+        "command_id": "90da5bef-9600-426e-938a-117c3a83c2df",
         "unique_domains": 5202
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T06:48:59.042442+00:00"
+      "start_time": "2026-04-26T21:24:05.070946+00:00"
     },
     {
       "test_id": "EX-07",
@@ -166,16 +191,20 @@
         "successful_queries": 3901,
         "data_size_kb": 150,
         "total_time_seconds": 500,
-        "attack_time": "2026-04-27T07:04:41.407581+00:00",
-        "command_id": "56da9896-7551-4d2f-8605-1ef950fadd78",
+        "attack_time": "2026-04-26T21:45:50.210233+00:00",
+        "command_id": "0edbf0f7-cfcb-4f09-9530-282cde6df929",
         "unique_domains": 3901
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T07:04:41.407581+00:00"
+      "start_time": "2026-04-26T21:45:50.210233+00:00"
     },
     {
       "test_id": "EX-08",
@@ -189,16 +218,20 @@
         "successful_queries": 900,
         "data_size_kb": 10,
         "total_time_seconds": 120,
-        "attack_time": "2026-04-27T07:20:46.989187+00:00",
-        "command_id": "13b83e5c-6e3e-4118-9bdd-5a6e786247ff",
+        "attack_time": "2026-04-26T22:09:59.911068+00:00",
+        "command_id": "4bd2bc37-b777-4c6e-a36f-11e443a5f54e",
         "unique_domains": 900
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T07:20:46.989187+00:00"
+      "start_time": "2026-04-26T22:09:59.911068+00:00"
     },
     {
       "test_id": "EX-09",
@@ -212,16 +245,20 @@
         "successful_queries": 1951,
         "data_size_kb": 75,
         "total_time_seconds": 190,
-        "attack_time": "2026-04-27T07:36:32.335240+00:00",
-        "command_id": "d9200134-82d7-4711-927b-991f6234ad24",
+        "attack_time": "2026-04-26T22:27:38.669185+00:00",
+        "command_id": "9bed9094-9fa3-4f78-a0e5-943c9e784d59",
         "unique_domains": 1951
       },
       "monitoring_duration_minutes": 15,
       "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T07:36:32.335240+00:00"
+      "start_time": "2026-04-26T22:27:38.669185+00:00"
     },
     {
       "test_id": "EX-10",
@@ -233,14 +270,18 @@
         "success": false,
         "error": "Timeout waiting for SSM command completion",
         "queries_sent": 0,
-        "attack_time": "2026-04-27T07:52:22.382495+00:00"
+        "attack_time": "2026-04-26T22:46:29.047542+00:00"
       },
       "monitoring_duration_minutes": 15,
-      "total_findings": 0,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
       "correlated_findings": 0,
       "detected": false,
       "findings": [],
-      "start_time": "2026-04-27T07:52:22.382495+00:00"
+      "start_time": "2026-04-26T22:46:29.047542+00:00"
     }
   ]
 }

@@ -1,0 +1,382 @@
+{
+  "test_suite": "DNS Exfiltration Detection Analysis",
+  "hypothesis": "H2: Observing GuardDuty detection behavior for DNS exfiltration under controlled test conditions",
+  "aws_region": "eu-west-2",
+  "execution_date": "2026-04-27T02:59:44.334634+00:00",
+  "total_tests": 10,
+  "detection_summary": {
+    "total_tests": 10,
+    "successful_attacks": 9,
+    "detected": 10,
+    "detection_rate_percent": 100.0,
+    "observations": {
+      "detection_rate_observed": 100.0,
+      "ttd_median_observed": 187.17467699999997
+    }
+  },
+  "ttd_statistics": {
+    "mean_seconds": 232.30093119999998,
+    "median_seconds": 187.17467699999997,
+    "min_seconds": 6.250348,
+    "max_seconds": 684.790858,
+    "stddev_seconds": 187.6668768718651
+  },
+  "test_results": [
+    {
+      "test_id": "EX-01",
+      "description": "DNS Tunnelling - Small volume, moderate rate",
+      "data_size_kb": 50,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 170,
+        "attack_time": "2026-04-26T23:22:20.387368+00:00",
+        "command_id": "ebb70019-94ca-4a5f-9e0f-f0a0563c3ab5",
+        "unique_domains": 1301
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 145.612632,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-26T23:22:20.387368+00:00"
+    },
+    {
+      "test_id": "EX-02",
+      "description": "DNS Tunnelling - Medium volume, moderate rate",
+      "data_size_kb": 100,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 2601,
+        "successful_queries": 2601,
+        "data_size_kb": 100,
+        "total_time_seconds": 340,
+        "attack_time": "2026-04-26T23:40:53.263278+00:00",
+        "command_id": "1973f4af-71c6-46de-acd1-bde7c5a22835",
+        "unique_domains": 2601
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 228.736722,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-26T23:40:53.263278+00:00"
+    },
+    {
+      "test_id": "EX-03",
+      "description": "DNS Tunnelling - Small volume, high rate",
+      "data_size_kb": 50,
+      "queries_per_second": 20,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1301,
+        "successful_queries": 1301,
+        "data_size_kb": 50,
+        "total_time_seconds": 110,
+        "attack_time": "2026-04-27T00:02:17.866541+00:00",
+        "command_id": "9a73fec0-2df7-4ec4-a62a-3bd58a46cb30",
+        "unique_domains": 1301
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 103.133459,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T00:02:17.866541+00:00"
+    },
+    {
+      "test_id": "EX-04",
+      "description": "DNS Tunnelling - Medium volume, slow rate",
+      "data_size_kb": 75,
+      "queries_per_second": 5,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1951,
+        "successful_queries": 1951,
+        "data_size_kb": 75,
+        "total_time_seconds": 450,
+        "attack_time": "2026-04-27T00:19:45.954382+00:00",
+        "command_id": "df4db619-deb3-40aa-a3dd-676b1f656225",
+        "unique_domains": 1951
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 299.045618,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T00:19:45.954382+00:00"
+    },
+    {
+      "test_id": "EX-05",
+      "description": "DNS Tunnelling - Low-and-slow (threshold test)",
+      "data_size_kb": 25,
+      "queries_per_second": 2,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 900,
+        "successful_queries": 900,
+        "data_size_kb": 25,
+        "total_time_seconds": 470,
+        "attack_time": "2026-04-27T00:43:02.453760+00:00",
+        "command_id": "96f1fb1e-872d-4a3a-9d63-20c8c958ff49",
+        "unique_domains": 900
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 343.54624,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T00:43:02.453760+00:00"
+    },
+    {
+      "test_id": "EX-06",
+      "description": "DNS Tunnelling - High volume, high rate burst",
+      "data_size_kb": 200,
+      "queries_per_second": 25,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 5202,
+        "successful_queries": 5202,
+        "data_size_kb": 200,
+        "total_time_seconds": 360,
+        "attack_time": "2026-04-27T01:06:39.856249+00:00",
+        "command_id": "acd687ce-c848-4385-b4d1-c21cca22a812",
+        "unique_domains": 5202
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 124.143751,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T01:06:39.856249+00:00"
+    },
+    {
+      "test_id": "EX-07",
+      "description": "DNS Tunnelling - Large volume, moderate rate sustained",
+      "data_size_kb": 150,
+      "queries_per_second": 10,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 3901,
+        "successful_queries": 3901,
+        "data_size_kb": 150,
+        "total_time_seconds": 510,
+        "attack_time": "2026-04-27T01:28:25.017418+00:00",
+        "command_id": "85b43b70-c5cf-464b-834b-014680d8ed39",
+        "unique_domains": 3901
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 245.982582,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T01:28:25.017418+00:00"
+    },
+    {
+      "test_id": "EX-08",
+      "description": "DNS Tunnelling - Minimal volume, very slow drip",
+      "data_size_kb": 10,
+      "queries_per_second": 1,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 900,
+        "successful_queries": 900,
+        "data_size_kb": 10,
+        "total_time_seconds": 120,
+        "attack_time": "2026-04-27T01:52:42.749652+00:00",
+        "command_id": "6076c4aa-fa72-4f2b-bd55-41144a944ede",
+        "unique_domains": 900
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 6.250348,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T01:52:42.749652+00:00"
+    },
+    {
+      "test_id": "EX-09",
+      "description": "DNS Tunnelling - Medium volume, high rate short burst",
+      "data_size_kb": 75,
+      "queries_per_second": 15,
+      "attack_executed": true,
+      "attack_details": {
+        "success": true,
+        "queries_sent": 1951,
+        "successful_queries": 1951,
+        "data_size_kb": 75,
+        "total_time_seconds": 190,
+        "attack_time": "2026-04-27T02:10:21.232898+00:00",
+        "command_id": "9fcdb0b5-534e-4121-932f-ddb06fbb82b0",
+        "unique_domains": 1951
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 141.767102,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T02:10:21.232898+00:00"
+    },
+    {
+      "test_id": "EX-10",
+      "description": "DNS Tunnelling - Large volume, slow rate extended",
+      "data_size_kb": 125,
+      "queries_per_second": 3,
+      "attack_executed": false,
+      "attack_details": {
+        "success": false,
+        "error": "Timeout waiting for SSM command completion",
+        "queries_sent": 0,
+        "attack_time": "2026-04-27T02:29:17.209142+00:00"
+      },
+      "monitoring_duration_minutes": 15,
+      "total_findings": 2,
+      "ignored_findings": 1,
+      "ignored_finding_types": [
+        "Policy:IAMUser/RootCredentialUsage"
+      ],
+      "correlated_findings": 1,
+      "detected": true,
+      "findings": [
+        {
+          "finding_id": "d6ce9280603db81de1991651e7758ca9",
+          "type": "Trojan:EC2/DGADomainRequest.B",
+          "severity": 8.0,
+          "time_to_detect_seconds": 684.790858,
+          "description": "The EC2 instance i-0c133dabd8f80c99e is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+          "title": "The EC2 instance i-0c133dabd8f80c99e queried a DGA domain name."
+        }
+      ],
+      "start_time": "2026-04-27T02:29:17.209142+00:00"
+    }
+  ]
+}

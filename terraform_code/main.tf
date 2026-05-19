@@ -89,7 +89,7 @@ resource "aws_security_group" "sg_web_app" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip_cidr]
+    cidr_blocks = [trimspace(var.my_ip_cidr)]
   }
 
   # HTTPS access from your IP only
@@ -98,7 +98,7 @@ resource "aws_security_group" "sg_web_app" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip_cidr]
+    cidr_blocks = [trimspace(var.my_ip_cidr)]
   }
 
   # SSH access from your IP only
@@ -107,7 +107,7 @@ resource "aws_security_group" "sg_web_app" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip_cidr]
+    cidr_blocks = [trimspace(var.my_ip_cidr)]
   }
 
   # Allow all outbound traffic

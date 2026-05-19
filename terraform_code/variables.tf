@@ -13,7 +13,7 @@ variable "my_ip_cidr" {
   # IMPORTANT: Change this to YOUR actual IP address
   # Find it by visiting: https://whatismyipaddress.com
   # Then add /32 at the end (e.g., "198.51.100.42/32")
-  default     = "102.90.98.133/32"  # Sampson's IP
+  default     = "102.90.100.173/32"  # Obuma's current IP
 }
 
 variable "ubuntu_ami" {
